@@ -4,7 +4,7 @@
 FROM debian:bullseye
 
 # Installations
-RUN apt-get update && apt-get install -y
+RUN apt-get update -y
 RUN apt-get install nginx -y
 RUN apt-get install openssl -y
 RUN apt-get install wget -y
@@ -20,7 +20,7 @@ RUN openssl req -new -key /home/private.key -out /home/csr.csr -subj "/C=MA/ST=C
 RUN openssl x509 -req -days 365 -in /home/csr.csr -signkey /home/private.key -out /home/certificate.crt
 
 # Copy the configuration files
-COPY conf/default.conf /etc/nginx/conf.d
+COPY conf/default /etc/nginx/sites-enabled/
 
 # Expose ports
 EXPOSE 443

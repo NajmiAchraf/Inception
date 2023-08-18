@@ -4,7 +4,7 @@ build :
 	docker build . -t mariadb
 
 run	:
-	docker run --env-file /workspaces/Inception/srcs/.env -dp 3306:3306 --name mariadb mariadb
+	docker run --env-file /home/anajmi/Desktop/Inception/srcs/.env -dp 3306:3306 --name mariadb mariadb
 
 show :
 	docker image ls

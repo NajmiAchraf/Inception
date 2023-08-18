@@ -9,7 +9,10 @@ down:
 clean:
 	docker compose -f ./srcs/docker-compose.yml down --rmi all -v --remove-orphans
 
-re: clean up
+fclean: clean
+	docker system prune --all
+
+re: fclean up
 
 # stop :
 # 	-docker stop $(shell docker ps -aq)

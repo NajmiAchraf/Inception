@@ -4,14 +4,22 @@
 FROM debian:bullseye
 
 # Installations for wordpress
-RUN apt-get update
-RUN apt-get install -y php7.4 php7.4-fpm php7.4-mysql mariadb-client curl sendmail
+RUN apt-get update -y
+RUN apt-get install -y php7.4
+RUN apt-get install -y php7.4-fpm
+RUN apt-get install -y php7.4-mysql
+RUN apt-get install -y mariadb-client
+RUN apt-get install -y curl
 
 # Create folder for wordpress
-RUN mkdir -p /var/www/html/wordpress
+WORKDIR /var/www/html/wordpress
+RUN mkdir -p /run/php
 
 # Copy PHP-FPM pool configuration
-COPY conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+# COPY conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
+
 
 # Downloading WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -29,4 +37,4 @@ EXPOSE 9000
 ENTRYPOINT ["bash", "/home/script.sh"]
 
 # Run php-fpm
-CMD ["php-fpm7.4", "-R", "-F"]
+# CMD ["php-fpm7.4", "-R", "-F"]
