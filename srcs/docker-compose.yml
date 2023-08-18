@@ -4,7 +4,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/
-    # restart: always
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -43,7 +43,7 @@ services:
       # WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
     ports:
       - 9000:9000
-    # restart: always
+    restart: always
     init: true
 
   nginx:
@@ -59,7 +59,7 @@ services:
       - wordpress:/var/www/html/wordpress
     depends_on:
       - wordpress
-    # restart: always
+    restart: always
     init: true
 
 networks:

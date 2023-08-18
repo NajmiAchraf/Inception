@@ -10,6 +10,9 @@ RUN apt-get install -y php7.4 php7.4-fpm php7.4-mysql mariadb-client curl sendma
 # Create folder for wordpress
 RUN mkdir -p /var/www/html/wordpress
 
+# Copy PHP-FPM pool configuration
+COPY conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+
 # Downloading WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
@@ -21,9 +24,6 @@ RUN chmod +x /home/script.sh
 
 # Expose port 9000 to connect to php-fpm container
 EXPOSE 9000
-
-# Create folder for php-fpm
-RUN mkdir /run/php/
 
 # Run the script.sh file
 ENTRYPOINT ["bash", "/home/script.sh"]

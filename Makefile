@@ -1,13 +1,13 @@
 all : down up
 
 up :
-	docker-compose -f ./srcs/docker-compose.yml up --build -d
+	docker compose -f ./srcs/docker-compose.yml up --build -d
 
 down:
-	docker-compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml down
 
 clean:
-	docker-compose -f ./srcs/docker-compose.yml down --rmi all -v
+	docker compose -f ./srcs/docker-compose.yml down --rmi all -v --remove-orphans
 
 re: clean up
 
