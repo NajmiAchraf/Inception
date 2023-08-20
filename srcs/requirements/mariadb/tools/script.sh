@@ -12,6 +12,8 @@ echo "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PAS
 
 echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" | mysql
 
+echo "REQUIRE NOT REGEXP 'admin|Admin|administrator|Administrator';" | mysql
+
 # Creating a new user with lower power to avoid using the admin account
 echo "CREATE USER '$WP_USER_LOWER'@'%' IDENTIFIED BY '$WP_PASSWORD_LOWER';" | mysql
 

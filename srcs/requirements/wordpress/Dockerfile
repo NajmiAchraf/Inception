@@ -16,10 +16,7 @@ WORKDIR /var/www/html/wordpress
 RUN mkdir -p /run/php
 
 # Copy PHP-FPM pool configuration
-# COPY conf/www.conf /usr/local/etc/php-fpm.d/www.conf
-
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
-
 
 # Downloading WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -34,7 +31,4 @@ RUN chmod +x /home/script.sh
 EXPOSE 9000
 
 # Run the script.sh file
-ENTRYPOINT ["bash", "/home/script.sh"]
-
-# Run php-fpm
-# CMD ["php-fpm7.4", "-R", "-F"]
+CMD ["bash", "/home/script.sh"]

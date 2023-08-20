@@ -1,6 +1,10 @@
 all : down up
 
-up :
+dir :
+	-mkdir -p /home/$(USER)/data/wordpress
+	-mkdir -p /home/$(USER)/data/mariadb
+
+up : dir
 	docker compose -f ./srcs/docker-compose.yml up --build -d
 
 down:
@@ -12,16 +16,7 @@ clean:
 fclean: clean
 	docker system prune --all
 
-re: fclean up
-
-# stop :
-# 	-docker stop $(shell docker ps -aq)
-
-# clean : stop
-# 	-docker rm $(shell docker ps -aq) -f
-# 	-docker image rm $(shell docker image ls -q) -f
-# 	-docker volume rm $(shell docker volume ls -q) -f
-# 	-docker network rm $(shell docker network ls -q)
+re: clean up
 
 logs :
 	@printf "\033[1;31m" && printf "Nginx logs\n" && printf "\033[0m"
